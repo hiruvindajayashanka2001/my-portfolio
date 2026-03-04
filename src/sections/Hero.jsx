@@ -35,7 +35,6 @@ const Hero = () => {
                     <p className='text-white-5- md:text-xl relative z-1- pointer-events-none'>
                             Hi, I'm Hiruvinda, a developer base in Sri lanka with a passon for code
                     </p>
-                    <Button className="md:w-80 md:h-16 w-60 h-12" id="button" text="See My Work"/>
                 </div>
                 </header>
                 {/*RIGHT: 3D MODEL*/}
