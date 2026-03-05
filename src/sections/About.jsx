@@ -97,12 +97,19 @@ const About = () => {
 
             {/* Photo */}
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-72 md:w-96 z-20 flex items-end justify-center">
-              <img
-                src="/images/my-image.png"
-                alt="Hiruvinda"
-                className="w-full object-contain drop-shadow-2xl"
-                style={{ filter: "drop-shadow(0 20px 40px rgba(168,85,247,0.4))" }}
-              />
+              <div className="w-full"
+                style={{
+                  WebkitMaskImage: "linear-gradient(to top, transparent 0%, black 30%)",
+                  maskImage: "linear-gradient( to top, transparent 0%, black 30%",
+                }}
+              >
+                <img
+                  src="/images/my-image.png"
+                  alt="Hiruvinda"
+                  className="w-full object-contain drop-shadow-2xl"
+                  style={{ filter: "drop-shadow(0 20px 40px rgba(168,85,247,0.4))" }}
+                />
+              </div>
             </div>
           </motion.div>
 
