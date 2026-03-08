@@ -108,23 +108,6 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
 
           {/* LEFT — Globe */}
-          <motion.div
-            custom={3}
-            variants={fadeUp}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="lg:col-span-2 w-full h-[380px] md:h-[500px] relative"          >
-            <GlobeCanvas />
-
-            <div className="absolute bottom-6 left-0 right-0 flex justify-center pointer-events-none">
-              <div className="flex items-center gap-2 bg-black/40 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2">
-                <span className="w-2 h-2 rounded-full bg-fuchsia-400 animate-pulse" />
-                <span className="text-xs text-gray-300 font-medium">
-                  Sri Lanka 🇱🇰 — Available Worldwide
-                </span>
-              </div>
-            </div>
-          </motion.div>
 
           {/* RIGHT — Form */}
           <motion.div
