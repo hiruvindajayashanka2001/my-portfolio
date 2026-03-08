@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import emailjs from "@emailjs/browser";
+import GlobeCanvas from '../components/GlobeCanvas';
 
 const Contact = () => {
   const sectionRef = useRef(null);
@@ -8,7 +9,7 @@ const Contact = () => {
   const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("idle"); // idle | sending | success | error
+  const [status, setStatus] = useState("idle");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -17,13 +18,12 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
-
     try {
       await emailjs.sendForm(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         formRef.current,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY      
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
       setStatus("success");
       setForm({ name: "", email: "", message: "" });
@@ -49,7 +49,7 @@ const Contact = () => {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative w-full min-h-screen overflow-hidden bg-black py-24 px-6 md:px-16 flex items-center"
+      className="relative w-full min-h-screen bg-black py-24 px-6 md:px-16 flex items-center"
     >
       {/* Purple dot grid */}
       <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
@@ -63,10 +63,10 @@ const Contact = () => {
       </div>
 
       {/* Glow blobs */}
-      <div className="absolute -top-40 right-0 w-[400px] h-[400px] rounded-full bg-purple-900 opacity-20 blur-3xl z-0 pointer-events-none" />
-      <div className="absolute -bottom-40 -left-20 w-[350px] h-[350px] rounded-full bg-purple-800 opacity-10 blur-3xl z-0 pointer-events-none" />
+      <div className="absolute -top-40 right-0 w-[400px] h-[400px] rounded-full bg-purple-900 opacity-20 blur-3xl z-0 pointer-events-none select-none" />
+      <div className="absolute -bottom-40 -left-20 w-[350px] h-[350px] rounded-full bg-purple-800 opacity-10 blur-3xl z-0 pointer-events-none select-none" />
 
-      <div className="relative z-10 max-w-5xl mx-auto w-full">
+      <div className="relative z-20 max-w-7xl mx-auto w-full">
 
         {/* Label */}
         <motion.span
@@ -98,23 +98,24 @@ const Contact = () => {
           variants={fadeUp}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="text-gray-400 text-base mb-14 max-w-lg"
+          className="text-gray-400 text-base mb-12 max-w-lg"
         >
           Have a project in mind or just want to say hi? Drop me a message and
           I'll get back to you as soon as possible.
         </motion.p>
 
-        {/* Two column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+        {/* Two column — Globe left, Form right */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
 
+          {/* LEFT — Globe */}
 
-          {/* Right form */}
+          {/* RIGHT — Form */}
           <motion.div
             custom={4}
             variants={fadeUp}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="lg:col-span-3"
+            className="lg:col-span-3 relative z-30"
           >
             <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4">
 
@@ -145,7 +146,7 @@ const Contact = () => {
                 value={form.message}
                 onChange={handleChange}
                 required
-                rows={6}
+                rows={7}
                 className={inputClass}
               />
 
@@ -169,7 +170,6 @@ const Contact = () => {
                 )}
               </motion.button>
 
-              {/* Success / Error feedback */}
               {status === "success" && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
